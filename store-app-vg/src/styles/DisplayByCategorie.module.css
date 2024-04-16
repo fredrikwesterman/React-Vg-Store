@@ -1,0 +1,14 @@
+.productsWrapper {
+    margin: 0 auto;
+    width: 60%;
+}
+
+.singleProductList {
+    margin: 15px 5px 15px 5px;
+    list-style-type: none;
+}
+
+.productImg {
+    height: 150px;
+    width: 125px; 
+}
