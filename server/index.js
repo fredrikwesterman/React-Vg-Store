@@ -7,7 +7,7 @@ const db = mysql.createConnection({
   user: "root",
   host: "localhost",
   password: "password",
-  database: "storeserver",
+  database: "climbingstoreserver",
 });
 
 app.use(express.json());
