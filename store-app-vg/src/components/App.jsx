@@ -1,20 +1,17 @@
-import Header from "./Header/Header";
-import { useState } from "react";
+import ProductsContextProvider from "../Context/ProductsContext";
+import UsersContextProvider from "../Context/UsersContext";
+import Login from "./Loggin/Login";
+import ProductsList from "./ProductsList";
 
 function App() {
-  const [products, setProducts] = useState(null);
-  const fetchProds = () => {
-    fetch("http://localhost:3000/products")
-      .then((resp) => resp.json())
-      .then((data) => setProducts(data));
-  };
-
-  console.log(products);
-
   return (
     <>
-      <Header />
-      <button onClick={() => fetchProds()}>get that data!</button>
+      <UsersContextProvider>
+        <Login />
+      </UsersContextProvider>
+      {/* <ProductsContextProvider>
+        <ProductsList />
+      </ProductsContextProvider> */}
     </>
   );
 }
