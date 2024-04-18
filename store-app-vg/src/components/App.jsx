@@ -1,17 +1,12 @@
-import ProductsContextProvider from "../Context/ProductsContext";
-import UsersContextProvider from "../Context/UsersContext";
-import Login from "./Loggin/Login";
-import ProductsList from "./ProductsList";
+import Home from "./Home";
+import Header from "./Header/Header";
+import Switch from "./Header/Switch";
 
 function App() {
   return (
     <>
-      <UsersContextProvider>
-        <Login />
-      </UsersContextProvider>
-      {/* <ProductsContextProvider>
-        <ProductsList />
-      </ProductsContextProvider> */}
+      <Header />
+      <Switch />
     </>
   );
 }

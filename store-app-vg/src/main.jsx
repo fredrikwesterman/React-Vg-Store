@@ -2,12 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App";
 import "./index.css";
+import "./output.css";
 import { BrowserRouter } from "react-router-dom";
+import ProductsContextProvider from "../src/Context/ProductsContext";
+import UsersContextProvider from "../src/Context/UsersContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <UsersContextProvider>
+    <ProductsContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ProductsContextProvider>
+  </UsersContextProvider>
   // </React.StrictMode>,
 );
