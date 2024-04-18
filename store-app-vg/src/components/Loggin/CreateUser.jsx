@@ -1,25 +1,26 @@
-import { useContext, useState, useRef } from "react";
-import { NavLink, Navigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { UsersContext } from "../../Context/UsersContext";
 
 const CreateUser = () => {
   const { users, setUsers } = useContext(UsersContext);
 
-  const eInput = useRef();
-  const pInput = useRef();
-
   const [createEmail, setCreateEmail] = useState("");
   const [createPassword, setCreatePassword] = useState("");
+  const [emptyInput, setEmptyInput] = useState(false);
+  const [userAlreadyExist, setUserAlreadyExist] = useState(false);
 
   const createUser = async () => {
     try {
       if (createEmail.trim() === "" || createPassword.trim() === "") {
-        alert("Fields cannot be empty");
+        setEmptyInput(true);
+        setUserAlreadyExist(false);
         return;
       }
 
       if (users.some((user) => user.email === createEmail)) {
-        alert("User already exists");
+        setUserAlreadyExist(true);
+        setEmptyInput(false);
         return;
       }
 
@@ -45,37 +46,42 @@ const CreateUser = () => {
           password: createPassword,
         },
       ]);
+
+      setEmptyInput(false);
+      setUserAlreadyExist(false);
     } catch (error) {
       console.log(error + "error creating user!");
     }
   };
 
   return (
-    <div>
-      <label htmlFor="email">Email</label>
-      <input
-        type="email"
-        name="email"
-        id="email"
-        autoComplete="email"
-        placeholder="Email"
-        required
-        onChange={(e) => setCreateEmail(e.target.value)}
-      />
+    <>
+      <div>
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          autoComplete="email"
+          placeholder="Email"
+          onChange={(e) => setCreateEmail(e.target.value)}
+        />
 
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        autoComplete="password"
-        placeholder="Password"
-        required
-        onChange={(e) => setCreatePassword(e.target.value)}
-      />
-      <button onClick={() => createUser()}>Create user</button>
-      <NavLink to="/login">Back to login page</NavLink>
-    </div>
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          autoComplete="password"
+          placeholder="Password"
+          onChange={(e) => setCreatePassword(e.target.value)}
+        />
+        <button onClick={() => createUser()}>Create user</button>
+        <NavLink to="/login">Back to login page</NavLink>
+      </div>
+      {emptyInput && <div>Email or Password field cant be empty!</div>}
+      {userAlreadyExist && <div>Email already exist! Try another Email</div>}
+    </>
   );
 };
 export default CreateUser;
