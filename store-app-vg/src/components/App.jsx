@@ -1,4 +1,3 @@
-import Home from "./Home";
 import Header from "./Header/Header";
 import Switch from "./Header/Switch";
 
