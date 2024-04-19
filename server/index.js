@@ -44,23 +44,6 @@ app.post("/users", (req, res) => {
   );
 });
 
-app.post("/login", (req, res) => {
-
-  const { email, password } = req.body;
-
-  db.query(
-    "SELECT * FROM users WHERE email = ? AND password = ?;",
-    [email, password],
-    (err, result) => {
-      if (err) {
-        res.status(400).json(err);
-      } else {
-        res.status(200).json(result);
-      }
-    }
-  );
-});
-
 //get all the products.
 app.get("/products", (req, res) => {
   db.query("SELECT * FROM products;", (err, result) => {
@@ -71,6 +54,7 @@ app.get("/products", (req, res) => {
     }
   });
 });
+
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");

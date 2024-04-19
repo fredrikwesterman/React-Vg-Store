@@ -8,25 +8,20 @@ const ProductsList = () => {
   console.log(products);
 
   return (
-    <ul style={{ display: "flex" }}>
+    <div style={{ display: "flex" }}>
       {products ? (
-        products.map((product, idx) => (
-          <NavLink to={`/${product.id}`} state={{ product }}>
-            <div className="card w-96 bg-base-100 shadow-xl">
-              <li className="card-body" key={idx}>
-                <h2 className="card-title">{product.brand}</h2>
-                <p>{product.length}</p>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Go to product</button>
-                </div>
-              </li>
-            </div>
-          </NavLink>
+        products.map((product) => (
+          <div key={product.id}>
+            <NavLink to={`/${product.id}`} state={{ product }}>
+              <h2 className="card-title">{product.brand}</h2>
+              <p>{product.length}</p>
+            </NavLink>
+          </div>
         ))
       ) : (
         <div>No results</div>
       )}
-    </ul>
+    </div>
   );
 };
 

@@ -3,8 +3,8 @@ import ProductsList from "../Products/ProductsList";
 import Login from "../Loggin/Login";
 import CreateUser from "../Loggin/CreateUser";
 import SingleProduct from "../Products/SingleProduct";
-import App from "../App";
 import Home from "../Home";
+import Cart from "../ShoppingCart/ShoppingCart";
 
 const Switch = () => {
   return (
@@ -14,6 +14,7 @@ const Switch = () => {
       <Route path="/:id" element={<SingleProduct />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/create-user" element={<CreateUser />}></Route>
+      <Route path="/cart" element={<Cart />}></Route>
     </Routes>
   );
 };
