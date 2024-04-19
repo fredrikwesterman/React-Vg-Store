@@ -64,7 +64,10 @@ const Login = () => {
 
       {existingEmail && (
         <p>
-          User dont exist 🤷‍♂️ maybe <NavLink to="/create-user">create</NavLink>
+          User dont exist 🤷‍♂️ maybe{" "}
+          <NavLink style={{ color: "green" }} to="/create-user">
+            create
+          </NavLink>
           one?
         </p>
       )}

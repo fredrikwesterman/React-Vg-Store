@@ -10,9 +10,12 @@ const nav = () => {
       <nav
         style={{ display: "flex", margin: "5px", justifyContent: "flex-end" }}
       >
+        <NavLink to="/" style={{ marginRight: "15px" }}>
+          Home
+        </NavLink>
         <NavLink to="/products">Products</NavLink>
 
-        <NavLink style={{ margin: "0 30px 0 10px" }} to="/login">
+        <NavLink style={{ margin: "0 30px 0 15px" }} to="/login">
           Login
         </NavLink>
         <NavLink to="/cart">🛒</NavLink>
