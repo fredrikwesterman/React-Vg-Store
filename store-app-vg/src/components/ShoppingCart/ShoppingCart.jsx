@@ -2,17 +2,16 @@ import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../../Context/CartContextProvider";
 
 const ShoppingCart = () => {
-  const { cart, setCart } = useContext(CartContext);
+  const {
+    cart,
+    setCart,
+    totalPrice,
+    setTotalPrice,
+    placeOrder,
+    orderFailed,
+    orderSuccess,
+  } = useContext(CartContext);
   console.log(cart);
-
-  const [totalPrice, setTotalPrice] = useState(0);
-
-  useEffect(() => {
-    if (cart) {
-      const total = cart.reduce((acc, product) => acc + product.price, 0);
-      setTotalPrice(total);
-    }
-  }, [cart]);
 
   const removeFromCart = (product, price) => {
     const theCart = [...cart];
@@ -40,7 +39,10 @@ const ShoppingCart = () => {
                 <b>Price: </b>
                 {product.price}$
               </p>
-              <button onClick={() => removeFromCart(product, product.price)}>
+              <button
+                className="btn btn-error"
+                onClick={() => removeFromCart(product, product.price)}
+              >
                 Remove
               </button>
             </div>
@@ -51,8 +53,13 @@ const ShoppingCart = () => {
           <b>Total Price: </b>
           {totalPrice}$
         </h3>
-        <button>Place order</button>
+        <button className="btn btn-primary" onClick={() => placeOrder()}>
+          Place order
+        </button>
       </div>
+
+      {orderFailed && <div>Failed to place order, try again!</div>}
+      {orderSuccess && <div>Order placed! Thanks for ordering ❤️</div>}
     </>
   );
 };

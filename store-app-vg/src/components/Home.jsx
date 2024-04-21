@@ -11,10 +11,7 @@ const Home = () => {
             <span className="text-primary text-2xl">BEST</span> Climbing
             equipement ever!
           </p>
-          <NavLink
-            to="/products"
-            className="btn btn-neutral text-3xl text-white"
-          >
+          <NavLink to="/products" className="btn btn-primary text-2xl">
             Products
           </NavLink>
         </div>

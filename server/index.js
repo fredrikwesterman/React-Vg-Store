@@ -55,6 +55,33 @@ app.get("/products", (req, res) => {
   });
 });
 
+app.get("/orders", (req, res) => {
+  db.query("SELECT * FROM orders;", (err, result) => {
+    if (err) {
+      res.status(400).json(err);
+    } else {
+      res.status(200).json(result);
+    }
+  });
+});
+
+app.post("/orders", (req, res) => {
+
+  const { products, price } = req.body;
+
+  db.query(
+    "INSERT INTO orders (products, price) VALUES (?,?)",
+    [products, price],
+    (err, result) => {
+      if (err) {
+        res.status(400).json(err);
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+});
+
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");

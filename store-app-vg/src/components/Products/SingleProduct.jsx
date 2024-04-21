@@ -32,7 +32,7 @@ const SingleProduct = () => {
           {product.waterResistance}
         </p>
       </div>
-      <button className="btn btn-neutral" onClick={() => addToCart()}>
+      <button className="btn btn-primary" onClick={() => addToCart()}>
         Add to cart
       </button>
     </div>
