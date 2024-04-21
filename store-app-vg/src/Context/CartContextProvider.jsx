@@ -39,9 +39,9 @@ const CartContextProvider = (props) => {
           setOrderFailed(true);
         }
 
+        setCart([]);
         setOrderFailed(false);
         setOrderSuccess(true);
-        const data = response.json();
       } else {
         setOrderFailed(true);
       }

@@ -64,6 +64,7 @@ const CreateUser = () => {
           id="email"
           autoComplete="email"
           placeholder="Email"
+          minLength="5"
           onChange={(e) => setCreateEmail(e.target.value)}
         />
 
@@ -74,6 +75,7 @@ const CreateUser = () => {
           id="password"
           autoComplete="password"
           placeholder="Password"
+          minLength="5"
           onChange={(e) => setCreatePassword(e.target.value)}
         />
         <button onClick={() => createUser()}>Create user</button>
