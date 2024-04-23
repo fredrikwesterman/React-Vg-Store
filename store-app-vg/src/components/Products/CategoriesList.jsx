@@ -8,7 +8,7 @@ const CategoriesList = () => {
     <div className="flex">
       {categories &&
         categories.map((category) => (
-          <p className="btn btn-accent mr-1 mt-4">{category.type}</p>
+          <p className="btn btn-border mr-1 mt-4">{category.type}</p>
         ))}
     </div>
   );
