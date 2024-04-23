@@ -1,9 +1,13 @@
-import { useContext } from "react";
-import { useLocation, NavLink } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useLocation, NavLink, useNavigate } from "react-router-dom";
 import { CartContext } from "../../Context/CartContextProvider";
+import ProdImg from "../../imgs/rope.jpg";
 
 const SingleProduct = () => {
   const { cart, setCart } = useContext(CartContext);
+  const [addToCartSuccess, setAddToCartSuccess] = useState(false);
+
+  const navigate = useNavigate();
 
   const location = useLocation();
   const { product } = location.state || {};
@@ -11,11 +15,17 @@ const SingleProduct = () => {
 
   const addToCart = () => {
     setCart([...cart, product]);
+    setAddToCartSuccess(true);
+
+    setTimeout(() => {
+      setAddToCartSuccess(false);
+    }, "1800");
   };
 
   return (
     <>
-      <div className="text-sm breadcrumbs">
+      <div className="divider"></div>
+      <div className="text-sm breadcrumbs mt-6">
         <ul>
           <li>
             <NavLink to="/">Home</NavLink>
@@ -24,45 +34,60 @@ const SingleProduct = () => {
             <NavLink to="/products">Products</NavLink>
           </li>
           <li>
-            <p>{product.brand}</p>
+            <p>{product.name}</p>
           </li>
         </ul>
       </div>
-      <div>
-        <h2>
-          <b>Name: </b>
-          {product.brand}
-        </h2>
-        <p>
-          <b>Price: </b>
-          {product.price}$
-        </p>
-        <p>
-          <b>Description: </b>
-          {product.ropeDescription}
-        </p>
-        <div className="flex">
+      <div className="container flex mt-6 bg-base-200 shadow-xl">
+        <img className="rounded" src={ProdImg} alt="Product img" />
+        <div className="ml-6">
+          <h2 className="text-bold text-4xl mt-6">{product.name}</h2>
+          <i>Brand: {product.brand}</i>
           <p>
-            <b>Length: </b>
-            {product.length}
+            <br />
+            <b>Price: </b>
+            {product.price}$
           </p>
-          <p className="ml-4">|</p>
-          <p className="mr-4 ml-4">
-            <b>Thickness: </b>
-            {product.thickness}
-          </p>
-          <p className="mr-4">|</p>
+          <div className="divider"></div>
           <p>
-            <b>Water Resistance: </b>
-            {product.waterResistance}
+            <b>Description </b>
+            <br />
+            {product.ropeDescription}
           </p>
+          <div className="divider"></div>
+          <div className="flex">
+            <p>
+              <b>Length: </b>
+              {product.length}
+            </p>
+            <p className="ml-4">|</p>
+            <p className="mr-4 ml-4">
+              <b>Thickness: </b>
+              {product.thickness}
+            </p>
+            <p className="mr-4">|</p>
+            <p>
+              <b>Water Resistance: </b>
+              {product.waterResistance}
+            </p>
+          </div>
+          <div className="flex justify-end">
+            <button
+              className="btn btn-accent mt-6 mb-6"
+              onClick={() => addToCart()}
+            >
+              Add to cart
+            </button>
+          </div>
         </div>
-        <NavLink to="/products">
-          <button className="btn btn-primary mt-4" onClick={() => addToCart()}>
-            Add to cart
-          </button>
-        </NavLink>
       </div>
+      {addToCartSuccess && (
+        <div className="toast toast-start">
+          <div className="alert alert-success">
+            <span>Product added to cart!</span>
+          </div>
+        </div>
+      )}
     </>
   );
 };

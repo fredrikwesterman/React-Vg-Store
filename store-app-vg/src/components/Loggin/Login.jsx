@@ -37,10 +37,11 @@ const Login = () => {
 
   return (
     <>
+      <div className="divider"></div>
       <div className="container mx-auto mt-10">
-        <div className="card w-96 bg-neutral text-neutral-content">
+        <div className="card w-96 bg-base-200 text-neutral-content">
           <div className="card-body items-center text-center">
-            <h2 className="text-3xl mb-5">Log in</h2>
+            <h2 className="text-3xl mb-5 text-black">Log in</h2>
             <input
               type="email"
               name="email"
@@ -48,7 +49,7 @@ const Login = () => {
               autoComplete="email"
               placeholder="Email"
               onChange={(e) => setEmail(e.target.value)}
-              className="input input-bordered input-secondary w-full max-w-xs"
+              className="input input-bordered input-secondary w-full max-w-xs text-black"
             />
             <input
               type="password"
@@ -57,27 +58,29 @@ const Login = () => {
               autoComplete="password"
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
-              className="input input-bordered input-secondary w-full max-w-xs"
+              className="input input-bordered input-secondary w-full max-w-xs text-black"
             />
 
-            <button className="btn btn-primary" onClick={() => login()}>
+            <button className="btn btn-accent" onClick={() => login()}>
               Log in
             </button>
-            <NavLink to="/create-user" className="btn btn-ghost">
+            <NavLink
+              to="/create-user"
+              className="btn btn-ghost hover:scale-110 text-black"
+            >
               Create User
             </NavLink>
           </div>
+          {loginSucces ? (
+            <LoginSuccess />
+          ) : (
+            <LogginFailed
+              existingEmail={existingEmail}
+              wrongPassword={wrongPassword}
+            />
+          )}
         </div>
       </div>
-
-      {loginSucces ? (
-        <LoginSuccess />
-      ) : (
-        <LogginFailed
-          existingEmail={existingEmail}
-          wrongPassword={wrongPassword}
-        />
-      )}
     </>
   );
 };

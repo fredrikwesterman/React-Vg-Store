@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import { CartContext } from "../../Context/CartContextProvider";
 
 const ShoppingCart = () => {
@@ -23,37 +23,47 @@ const ShoppingCart = () => {
 
   return (
     <>
-      <div style={{ display: "flex" }}>
-        {cart &&
-          cart.map((product, idx) => (
-            <div key={idx} style={{ margin: "5px 15px" }}>
-              <h3>
-                <b>Product: </b>
-                {product.brand}
-              </h3>
-              <p>
-                <b>Length: </b>
-                {product.length}
-              </p>
-              <p>
-                <b>Price: </b>
-                {product.price}$
-              </p>
-              <button
-                className="btn btn-error"
-                onClick={() => removeFromCart(product, product.price)}
-              >
-                Remove
-              </button>
-            </div>
-          ))}
+      <div className="divider"></div>
+      <div className="overflow-x-auto">
+        <table className="table table-zebra">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Brand</th>
+              <th>Category</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cart &&
+              cart.map((product, idx) => (
+                <tr key={idx}>
+                  <td>{idx + 1}</td>
+                  <td>{product.name}</td>
+                  <td>{product.brand}</td>
+                  <td>{product.category}</td>
+                  <td>{product.price}$</td>
+                  <td></td>
+                  <td>
+                    <button
+                      className="btn btn-error"
+                      onClick={() => removeFromCart(product, product.price)}
+                    >
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </div>
-      <div style={{ display: "flex" }}>
-        <h3>
+      <div className="flex justify-end mt-6">
+        <h3 className="self-center mr-4">
           <b>Total Price: </b>
           {totalPrice}$
         </h3>
-        <button className="btn btn-primary" onClick={() => placeOrder()}>
+        <button className="btn btn-accent" onClick={() => placeOrder()}>
           Place order
         </button>
       </div>

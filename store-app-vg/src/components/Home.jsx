@@ -7,11 +7,10 @@ const Home = () => {
         <div className="max-w-md">
           <h1 className="text-8xl font-bold">Welcome!</h1>
           <p className="py-10">
-            Here you can buy the{" "}
-            <span className="text-primary text-2xl">BEST</span> Climbing
+            Here you can buy the <span className="text-2xl">BEST</span> Climbing
             equipement ever!
           </p>
-          <NavLink to="/products" className="btn btn-primary text-2xl">
+          <NavLink to="/products" className="btn btn-accent text-xl">
             Products
           </NavLink>
         </div>

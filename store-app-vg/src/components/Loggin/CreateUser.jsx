@@ -56,33 +56,48 @@ const CreateUser = () => {
 
   return (
     <>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          autoComplete="email"
-          placeholder="Email"
-          minLength="5"
-          onChange={(e) => setCreateEmail(e.target.value)}
-        />
+      <div className="divider"></div>
+      <div className="container mx-auto mt-10">
+        <div className="card w-96 bg-base-200 text-neutral-content">
+          <div className="card-body items-center text-center">
+            <h2 className="text-3xl mb-5 text-black">Create User</h2>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              autoComplete="email"
+              placeholder="Email"
+              minLength="5"
+              onChange={(e) => setCreateEmail(e.target.value)}
+              className="input input-bordered input-secondary w-full max-w-xs text-black"
+            />
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          autoComplete="password"
-          placeholder="Password"
-          minLength="5"
-          onChange={(e) => setCreatePassword(e.target.value)}
-        />
-        <button onClick={() => createUser()}>Create user</button>
-        <NavLink to="/login">Back to login page</NavLink>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              autoComplete="password"
+              placeholder="Password"
+              minLength="5"
+              onChange={(e) => setCreatePassword(e.target.value)}
+              className="input input-bordered input-secondary w-full max-w-xs text-black"
+            />
+            <button className="btn btn-accent" onClick={() => createUser()}>
+              Create user
+            </button>
+            <NavLink
+              to="/login"
+              className="btn btn-ghost hover:scale-110 text-black"
+            >
+              Back to login page
+            </NavLink>
+          </div>
+          {emptyInput && <div>Email or Password field cant be empty!</div>}
+          {userAlreadyExist && (
+            <div>Email already exist! Try another Email</div>
+          )}
+        </div>
       </div>
-      {emptyInput && <div>Email or Password field cant be empty!</div>}
-      {userAlreadyExist && <div>Email already exist! Try another Email</div>}
     </>
   );
 };
