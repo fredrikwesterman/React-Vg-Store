@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { ProductContext } from "../../Context/ProductsContext";
 import { NavLink } from "react-router-dom";
 import rope from "../../imgs/rope.jpg";
+import CategoriesList from "./CategoriesList";
 
 const ProductsList = () => {
   const { products } = useContext(ProductContext);
@@ -21,6 +22,7 @@ const ProductsList = () => {
           </li>
         </ul>
       </div>
+      <CategoriesList />
       <div className="container mx-auto px-4 flex flex-wrap mt-10">
         <h3></h3>
         {products ? (
