@@ -4,6 +4,8 @@ export const ProductContext = createContext();
 
 const ProductsContextProvider = (props) => {
   const [products, setProducts] = useState(null);
+  const [searchInput, setSearchInput] = useState("");
+  const [searchedProducts, setSearchedProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -17,8 +19,27 @@ const ProductsContextProvider = (props) => {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    const filterAuctions = searchInput.toLowerCase()
+      ? products.filter((product) => {
+          return product.name.toLowerCase().includes(searchInput.toLowerCase());
+        })
+      : [];
+    console.log(filterAuctions);
+
+    setSearchedProducts(filterAuctions);
+  }, [searchInput, products]);
+
   return (
-    <ProductContext.Provider value={{ products }}>
+    <ProductContext.Provider
+      value={{
+        products,
+        searchInput,
+        setSearchInput,
+        searchedProducts,
+        setSearchedProducts,
+      }}
+    >
       {props.children}
     </ProductContext.Provider>
   );

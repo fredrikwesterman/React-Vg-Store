@@ -12,9 +12,6 @@ const Header = () => {
         </NavLink>
       </div>
       <div className="flex ml-auto">
-        <SearchBar />
-      </div>
-      <div className="flex ml-4">
         <Nav />
       </div>
     </div>
