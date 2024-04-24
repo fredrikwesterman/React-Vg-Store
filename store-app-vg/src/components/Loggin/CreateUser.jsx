@@ -57,9 +57,9 @@ const CreateUser = () => {
   return (
     <>
       <div className="divider"></div>
-      <div className="container mx-auto mt-10">
-        <div className="card w-96 bg-base-200 text-neutral-content">
-          <div className="card-body items-center text-center">
+      <div className="container mt-10">
+        <div className="card w-96 bg-base-200 text-neutral-content mx-auto">
+          <div className="card-body items-center text-center ">
             <h2 className="text-3xl mb-5 text-black">Create User</h2>
             <input
               type="email"
@@ -69,7 +69,7 @@ const CreateUser = () => {
               placeholder="Email"
               minLength="5"
               onChange={(e) => setCreateEmail(e.target.value)}
-              className="input input-bordered input-secondary w-full max-w-xs text-black"
+              className="input input-bordered input-accent w-full max-w-xs text-black"
             />
 
             <input
@@ -80,7 +80,7 @@ const CreateUser = () => {
               placeholder="Password"
               minLength="5"
               onChange={(e) => setCreatePassword(e.target.value)}
-              className="input input-bordered input-secondary w-full max-w-xs text-black"
+              className="input input-bordered input-accent w-full max-w-xs text-black"
             />
             <button className="btn btn-accent" onClick={() => createUser()}>
               Create user

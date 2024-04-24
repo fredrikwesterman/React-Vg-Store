@@ -38,8 +38,8 @@ const Login = () => {
   return (
     <>
       <div className="divider"></div>
-      <div className="container mx-auto mt-10">
-        <div className="card w-96 bg-base-200 text-neutral-content">
+      <div className="container mt-10">
+        <div className="card w-96 bg-base-200 text-neutral-content mx-auto">
           <div className="card-body items-center text-center">
             <h2 className="text-3xl mb-5 text-black">Log in</h2>
             <input
@@ -49,7 +49,7 @@ const Login = () => {
               autoComplete="email"
               placeholder="Email"
               onChange={(e) => setEmail(e.target.value)}
-              className="input input-bordered input-secondary w-full max-w-xs text-black"
+              className="input input-bordered input-accent w-full max-w-xs text-black"
             />
             <input
               type="password"
@@ -58,7 +58,7 @@ const Login = () => {
               autoComplete="password"
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
-              className="input input-bordered input-secondary w-full max-w-xs text-black"
+              className="input input-bordered input-accent w-full max-w-xs text-black"
             />
 
             <button className="btn btn-accent" onClick={() => login()}>
