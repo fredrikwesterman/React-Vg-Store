@@ -9,12 +9,16 @@ const ProductsContextProvider = (props) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await fetch("http://localhost:3000/products");
-      if (!response.ok) {
-        throw new Error(error + "Could not fetch the data!");
+      try {
+        const response = await fetch("http://localhost:3000/products");
+        if (!response.ok) {
+          throw new Error(error + "Could not fetch the data!");
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.log(error + "problem with server. try again later.");
       }
-      const data = await response.json();
-      setProducts(data);
     };
     fetchProducts();
   }, []);

@@ -5,35 +5,8 @@ import LogginFailed from "./LogginFailed";
 import LoginSuccess from "./LoginSuccess";
 
 const Login = () => {
-  const { users } = useContext(UsersContext);
-  console.log(users);
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [existingEmail, setExistingEmail] = useState(false);
-  const [wrongPassword, setWrongPassword] = useState(false);
-  const [loginSucces, setLoginSucces] = useState(false);
-
-  const login = () => {
-    const existingEmail = users.find((user) => user.email === email);
-    if (!existingEmail) {
-      setExistingEmail(true);
-      setWrongPassword(false);
-      setLoginSucces(false);
-      return;
-    }
-
-    if (existingEmail.password !== password) {
-      setWrongPassword(true);
-      setExistingEmail(false);
-      setLoginSucces(false);
-      return;
-    }
-
-    setLoginSucces(true);
-    setWrongPassword(false);
-    setExistingEmail(false);
-  };
+  const { loginFunction, setEmail, setPassword, loginSucces, couldNotLoggin } =
+    useContext(UsersContext);
 
   return (
     <>
@@ -61,7 +34,7 @@ const Login = () => {
               className="input input-bordered input-accent w-full max-w-xs text-black"
             />
 
-            <button className="btn btn-accent" onClick={() => login()}>
+            <button className="btn btn-accent" onClick={() => loginFunction()}>
               Log in
             </button>
             <NavLink
@@ -74,10 +47,7 @@ const Login = () => {
           {loginSucces ? (
             <LoginSuccess />
           ) : (
-            <LogginFailed
-              existingEmail={existingEmail}
-              wrongPassword={wrongPassword}
-            />
+            <LogginFailed couldNotLoggin={couldNotLoggin} />
           )}
         </div>
       </div>

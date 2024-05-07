@@ -1,8 +1,8 @@
-import bcrypt from 'bcrypt'
 const express = require("express");
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
+const bcrypt = require('bcrypt');
 
 app.use(cors());
 
@@ -27,6 +27,43 @@ app.get("/users", (req, res) => {
   });
 });
 
+const hashingPassword = (password) => {
+  const salt = bcrypt.genSaltSync(12);
+  const hash = bcrypt.hashSync(password, salt)
+  return hash
+}
+
+const comparePasswords = (password, hashedPw) => {
+  return bcrypt.compareSync(password, hashedPw)
+}
+
+app.post("/login", (req, res) => {
+  const { email, password } = req.body;
+
+  db.query(
+    "SELECT * FROM users WHERE email = ?",
+    [email],
+    (err, result) => {
+      if (err) {
+        res.status(400).json(err);
+      } else {
+        if (result.length === 0) {
+          res.status(401).json({ message: "Invalid email or password" });
+        } else {
+          const user = result[0];
+          const hashedPw = user.password;
+
+          if (comparePasswords(password, hashedPw)) {
+            res.status(200).json({ message: "Login successful" });
+          } else {
+            res.status(401).json({ message: "Invalid email or password" });
+          }
+        }
+      }
+    }
+  );
+});
+
 //creating new users.
 app.post("/users", (req, res) => {
 
@@ -34,7 +71,7 @@ app.post("/users", (req, res) => {
 
   db.query(
     "INSERT INTO users (email, password) VALUES (?,?)",
-    [email, password],
+    [email, hashingPassword(password)],
     (err, result) => {
       if (err) {
         res.status(400).json(err);
