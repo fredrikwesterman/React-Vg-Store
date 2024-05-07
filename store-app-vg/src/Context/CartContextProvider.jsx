@@ -33,9 +33,6 @@ const CartContextProvider = (props) => {
           body: JSON.stringify(orderBody),
         });
         if (!response.ok) {
-          console.log(
-            "Post not completed, something wrong with the post-request."
-          );
           setOrderFailed(true);
         }
 

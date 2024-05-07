@@ -1,7 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../Context/CartContextProvider";
 
 const ShoppingCart = () => {
+  const [removeFromCartSuccess, setRemoveFromCartSuccess] = useState(false);
+
   const {
     cart,
     setCart,
@@ -17,8 +19,12 @@ const ShoppingCart = () => {
     const theCart = [...cart];
     theCart.splice(product, 1);
     setCart(theCart);
-
     setTotalPrice(totalPrice - price);
+
+    setRemoveFromCartSuccess(true);
+    setTimeout(() => {
+      setRemoveFromCartSuccess(false);
+    }, "2000");
   };
 
   return (
@@ -67,6 +73,13 @@ const ShoppingCart = () => {
           Place order
         </button>
       </div>
+      {removeFromCartSuccess && (
+        <div className="toast toast-start">
+          <div className="alert alert-error">
+            <span>Product Removed from cart!</span>
+          </div>
+        </div>
+      )}
 
       {orderFailed && <div>Failed to place order, try again!</div>}
       {orderSuccess && <div>Order placed! Thanks for ordering ❤️</div>}

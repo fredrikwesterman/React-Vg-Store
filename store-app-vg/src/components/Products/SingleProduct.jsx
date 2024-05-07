@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useLocation, NavLink, useNavigate } from "react-router-dom";
+import { useLocation, NavLink } from "react-router-dom";
 import { CartContext } from "../../Context/CartContextProvider";
 import ProdImg from "../../imgs/rope.jpg";
 
@@ -7,11 +7,8 @@ const SingleProduct = () => {
   const { cart, setCart } = useContext(CartContext);
   const [addToCartSuccess, setAddToCartSuccess] = useState(false);
 
-  const navigate = useNavigate();
-
   const location = useLocation();
   const { product } = location.state || {};
-  console.log(product);
 
   const addToCart = () => {
     setCart([...cart, product]);
@@ -19,7 +16,7 @@ const SingleProduct = () => {
 
     setTimeout(() => {
       setAddToCartSuccess(false);
-    }, "1800");
+    }, "2000");
   };
 
   return (
@@ -71,7 +68,7 @@ const SingleProduct = () => {
               {product.waterResistance}
             </p>
           </div>
-          <div className="flex justify-end">
+          <div>
             <button
               className="btn btn-accent mt-6 mb-6"
               onClick={() => addToCart()}
